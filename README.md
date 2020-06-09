@@ -1,0 +1,9 @@
+To hold the Cells in this project, a struct was made to hold information in the cells. Fields in this struct included number of generations active, neighbors, and the value of the cell (filled or empty).
+
+First, the program generates the initial colony either randomly or read in from a file. These initial values are stored in an array and then the array is used to populate the global array of currentGen made of cell structs. The value is added to the cell struct, the neighbors are calculated and stored so they only have to be found once, and if the value is filled then the number of active generations is set to one. 
+
+Next, the next generation is computed. To do this, the array of cells is iterated over and the number of active neighbors it has is found using its vector of found neighbor indeces (implemented as a pair). Based on the number of current active neighbors found, a decision is made based off the rules to either make the value empty or full and whether to set the number of active generations to zero or increase it by 1. The next generation is stored in another global array of cell structs.
+
+Once the next generation is found, the next generation is copied into the current generation array and printed and the process repeats. 
+
+One efficiency problem I see is continuously copying the global array next generation of cells into the array of current cells. This might not be a problem with just a few iterations but if you were to get to the hundreds then it might become troublesome. I probably should've made a local copy of the current generation when computing the next generation and then directly updated the real current with the next generation instead. 
