@@ -1,9 +1,17 @@
-To hold the Cells in this project, a struct was made to hold information in the cells. Fields in this struct included number of generations active, neighbors, and the value of the cell (filled or empty).
+# GAME OF LIFE PROJECT
 
-First, the program generates the initial colony either randomly or read in from a file. These initial values are stored in an array and then the array is used to populate the global array of currentGen made of cell structs. The value is added to the cell struct, the neighbors are calculated and stored so they only have to be found once, and if the value is filled then the number of active generations is set to one. 
+## Introduction
+This project simulates Conway's "Game of Life", where the evolution of a colony of cells is mapped given an initial state. The project generates an initial state through an input or random generation. The program then simulates the life cycle of a specified number of future generations of the initial colony. 
 
-Next, the next generation is computed. To do this, the array of cells is iterated over and the number of active neighbors it has is found using its vector of found neighbor indeces (implemented as a pair). Based on the number of current active neighbors found, a decision is made based off the rules to either make the value empty or full and whether to set the number of active generations to zero or increase it by 1. The next generation is stored in another global array of cell structs.
+## Guidelines/Rules
+This version of the game is played on a 20x20 two dimensional grid. Each grid location is either empty or filled by a single cell (X). A location has up to eight neighbors that are adjacent to it. The births and deaths of the cells happen simultaneously and any changes in a given generation start to have effect on other neighboring cells in the next generation. 
 
-Once the next generation is found, the next generation is copied into the current generation array and printed and the process repeats. 
+Rule 1) A location that has zero or one active neighbors will be empty the next generation because it dies from loneliness.
 
-One efficiency problem I see is continuously copying the global array next generation of cells into the array of current cells. This might not be a problem with just a few iterations but if you were to get to the hundreds then it might become troublesome. I probably should've made a local copy of the current generation when computing the next generation and then directly updated the real current with the next generation instead. 
+Rule 2) A location with two active neighbors is stable and nothing about the state of the location changes.
+
+Rule 3) A location with three active neighbors will contain a cell in the next generation.
+
+Rule 4) A location with four or more active neighbors will be empty in the next generation because it will die of overcrowding. 
+
+Rule 5) A cell that ages more than 10 generations dies, and will be empty the next generation regardless of how many active neighbors it has. 
